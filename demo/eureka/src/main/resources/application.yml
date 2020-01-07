@@ -1,0 +1,16 @@
+server:
+  port: 9999
+eureka:
+  instance:
+    hostname: xl-reg-center
+  client:
+    registerWithEureka: false
+    fetchRegistry: false
+    serviceUrl:
+      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
+  server:
+    enable-self-preservation: false
+    eviction-interval-timer-in-ms: 4000
+spring:
+  application:
+    name: eureka
