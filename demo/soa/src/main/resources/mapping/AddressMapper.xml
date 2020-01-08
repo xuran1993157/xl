@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xl.soa.mapper.AddressMapper">
+
+    <resultMap id="BaseResultMap" type="com.xl.common.bean.Address">
+        <result column="id" jdbcType="INTEGER" property="id" />
+        <result column="city" jdbcType="VARCHAR" property="city" />
+        <result column="create_time" jdbcType="TIMESTAMP" property="create_time" />
+        <result column="path" jdbcType="VARCHAR" property="path" />
+        <result column="province" jdbcType="VARCHAR" property="province" />
+        <result column="region" jdbcType="VARCHAR" property="region" />
+        <result column="parent_id" jdbcType="INTEGER" property="parent_id" />
+        <result column="last_update_time" jdbcType="TIMESTAMP" property="last_update_time" />
+        <result column="last_operator_Id" jdbcType="INTEGER" property="last_operator_Id" />
+        <result column="last_operator_name" jdbcType="VARCHAR" property="last_operator_name" />
+        <result column="serial_no" jdbcType="VARCHAR" property="serial_no" />
+    </resultMap>
+
+    <select id="selectAll" resultMap="BaseResultMap">
+        select * from lyc_address
+    </select>
+
+</mapper>

@@ -25,3 +25,15 @@ eureka:
   client:
     serviceUrl:
       defaultZone: http://localhost:9999/eureka
+
+
+mybatis:
+  mapper-locations: classpath:mapping/*Mapper.xml
+  type-aliases-package: com.xl.soa
+
+#showSql
+logging:
+  level:
+    com:
+      example:
+        mapper : debug
