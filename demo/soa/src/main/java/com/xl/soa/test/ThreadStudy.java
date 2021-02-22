@@ -8,11 +8,37 @@ import java.util.concurrent.*;
 public class ThreadStudy {
 
     volatile static CountDownLatch countDownLatch = new CountDownLatch(3);
+
+    private final Object o = new Object();
+
     public static void main(String[] args) {
         //countDownLatch和futureTask都是闭锁实现。
         //futureTask();
 //        cyclicBarrierTest();
-        currentHashMap("a");
+//        currentHashMap("a");
+        ThreadStudy s = new ThreadStudy();
+        Thread t = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                s.runFalse();
+            }
+        });
+        Thread t1 = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                s.runTrue();
+            }
+        });
+        t.start();
+        t1.start();
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        synchronized (s){
+            s.notifyAll();
+        }
     }
 
     /**
@@ -148,4 +174,38 @@ public class ThreadStudy {
             e.printStackTrace();
         }
     }
+
+    volatile boolean flag = false;
+
+    public void runTrue(){
+        System.out.println("等待执行runTrue");
+        synchronized (this){
+            if(flag != true){
+                try {
+                    wait();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                System.out.println("执行runTrue");
+                flag = false;
+            }
+        }
+    }
+
+    public void runFalse(){
+        System.out.println("等待执行runFalse");
+        synchronized (this){
+            if(flag != true){
+                try {
+                    wait();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                System.out.println("执行runFalse");
+                flag = false;
+            }
+        }
+    }
+
+
 }
